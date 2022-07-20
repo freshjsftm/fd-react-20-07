@@ -1,26 +1,31 @@
 React;
 ReactDOM;
-class Heading extends React.Component {
+
+class Counter extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      count: 0
+    };
+    // this.decrement = this.decrement.bind(this)
+    // this.increment = this.increment.bind(this)
+  }
+  decrement = () => {
+    this.setState({count: this.state.count-1})
+  }
+  increment= () => {
+    this.setState({count: this.state.count+1})
+  }
   render() {
-    const { titleElem, clName, children } = this.props;
-    console.log(this);
-    return React.createElement(
-      "h2",
-      {
-        title: titleElem,
-        className: clName,
-      },
-      "Hi!",
-      ...children
+    const {count} = this.state;
+    return React.createElement(React.Fragment, null, 
+      React.createElement('h2', null, count),
+      React.createElement('button', {onClick:this.decrement}, '-'),
+      React.createElement('button', {onClick:this.increment}, '+'),
     );
   }
 }
 const container = document.getElementById("root");
-const element = React.createElement(
-  Heading,
-  { titleElem: "title for h2", clName: "heading" },
-  "qwe",
-  "asd"
-);
+const element = React.createElement(Counter);
 
 ReactDOM.render(element, container);
